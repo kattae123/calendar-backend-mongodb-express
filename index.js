@@ -3,7 +3,7 @@ const dbConection = require('./database/config');
 const cors = require('cors');
 require('dotenv').config();
 
-console.log( process.env )
+// console.log( process.env )
 
 // Crear el servidor de express
 const app = express();
@@ -25,6 +25,11 @@ app.use( express.json() );
 app.use('/api/auth', require('./routes/auth'));
 // TODO: CRUD: Eventos,
 app.use('/api/events', require('./routes/events'));
+
+app.get('*', ( req, res ) => {
+    res.sendFile( __dirname + '/public/index.html')
+})
+
 
 // Escuchar peticiones
 app.listen( process.env.PORT , () => {
